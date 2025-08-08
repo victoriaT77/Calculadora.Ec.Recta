@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Ecuación del Plano</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MathJax para renderizar ecuaciones -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body class="bg-dark text-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">🧮 Calculadora de Ecuación del Plano en 3D</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="vector1" class="form-label">Punto A (formato: (x, y, z))</label>
+                <input type="text" name="vector1" class="form-control" placeholder="Ejemplo: (2.3, 4.6, 1.3)" required>
+            </div>
+            <div class="mb-3">
+                <label for="vector2" class="form-label">Punto B (formato: (x, y, z))</label>
+                <input type="text" name="vector2" class="form-control" placeholder="Ejemplo: (1.0, 2.0, 3.0)" required>
+            </div>
+            <div class="mb-3">
+                <label for="vector3" class="form-label">Punto C (formato: (x, y, z))</label>
+                <input type="text" name="vector3" class="form-control" placeholder="Ejemplo: (4.5, 5.5, 6.5)" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Calcular</button>
+        </form>
+
+        <hr class="my-5">
+        <div class="bg-secondary p-4 rounded">
+            <h2>🧠 ¿Cómo se calcula la ecuación de un plano en 3D?</h2>
+            <p>Para obtener la ecuación de un plano que pasa por tres puntos \( A, B, C \), se siguen estos pasos:</p>
+            <ol>
+                <li>Calcula dos vectores en el plano:  
+                    \( \vec{AB} = B - A \) y \( \vec{AC} = C - A \).</li>
+                <li>Obtén el vector normal \( \vec{n} \) al plano usando el producto cruzado:  
+                    \( \vec{n} = \vec{AB} \times \vec{AC} \).</li>
+                <li>Usa la forma general del plano:  
+                    \[
+                    n_x(x - x_0) + n_y(y - y_0) + n_z(z - z_0) = 0
+                    \]
+                    donde \( (x_0, y_0, z_0) \) es un punto del plano (por ejemplo, A).</li>
+                <li>Expande y simplifica para obtener la ecuación en forma general:  
+                    \[
+                    ax + by + cz = d
+                    \]</li>
+            </ol>
+            <p>Este método garantiza que el plano contiene los tres puntos y está definido por su orientación en el espacio.</p>
+
+            <h3 class="mt-4">📊 Ejemplo gráfico</h3>
+            <img src="/static/img/imagenEjemplo.jpeg" alt="Ejemplo de plano en 3D" class="img-fluid rounded border">
+<p class="mt-2"><a href="https://www.geogebra.org/m/dvgybezh" target="_blank">Ver ejemplo interactivo en GeoGebra</a></p>
+        </div>
+
+        {% if error %}
+            <div class="alert alert-danger mt-3">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
